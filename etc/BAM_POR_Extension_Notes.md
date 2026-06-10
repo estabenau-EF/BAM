@@ -57,6 +57,7 @@ A regression-based proxy was constructed using JK (nearest suitable station):
 - All 17 stations within ±25% of historical annual mean (largest delta: LR −11.8%)
 - General slight drying trend (−1% to −12%) consistent with regional climate signals
 - August −28%, November +77% — real climate signals (active hurricane seasons)
+- Large deltas on months with low absolute values, further analysis has value
 - 2026 calendar-year sanity flag is artifact of 4-month partial year (Jan–Apr only)
 
 ### Script
