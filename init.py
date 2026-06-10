@@ -1228,10 +1228,11 @@ def GetBasinStageData( model ):
         station_stage = dict()
 
         for j in range( 1, len( words ) ) :
-            if 'NA' in words[ j ].strip() :
+            word = words[ j ].strip()
+            if not word or 'NA' in word :
                 stage = None
             else :
-                stage = float( words[ j ] )
+                stage = float( word )
 
             station_stage[ model.stage_stations[ j-1 ] ] = stage
                 
