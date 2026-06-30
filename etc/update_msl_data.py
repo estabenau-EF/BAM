@@ -20,12 +20,13 @@ Method:
   This matches the existing MSL_Anomaly.csv computation documented in
   etc/MonthlyMean_1999-9_2017-10.csv and etc/MSL_Plot.R.
 
-  Extension starts at 2017-10-15 (MSL_Anomaly.csv already has through 2017-09-15).
-  Extension ends   at 2026-04-15 (matching other BAM WY2026 data files).
+  Extension runs in two passes:
+    Pass 1: 2017-10-15 through 2026-04-15 (initial WY2026 extension)
+    Pass 2: 2026-05-15 added to anchor the spline past the Apr 30 POR end
 
 Output:
   data/Tide/MSL_Anomaly.csv              -- appended in-place
-  etc/MonthlyMean_1999-9_2026-4-30.csv   -- new combined raw data file
+  etc/MonthlyMean_1999-9_2026-5-15.csv   -- combined raw data file
 
 Usage:
   python update_msl_data.py             # fetch and write
@@ -55,15 +56,15 @@ STATIONS = [
 # Anomaly = MeanMSL_NAVD88 - MSL_NAVD_EPOCH  ==>  MeanMSL_NAVD88 + 0.148
 MSL_NAVD_EPOCH = -0.148
 
-EXTEND_FROM = (2017, 10)   # first new month (file already has through 2017-09)
-EXTEND_TO   = (2026,  4)   # last new month  (WY2026 end)
+EXTEND_FROM = (2026,  5)   # first new month (file already has through 2026-04-15)
+EXTEND_TO   = (2026,  5)   # last new month  (one month past WY2026 end to anchor spline)
 
 DATA_DIR  = Path(__file__).resolve().parent.parent / 'data'
 ETC_DIR   = Path(__file__).resolve().parent
 
 ANOMALY_FILE  = DATA_DIR / 'Tide' / 'MSL_Anomaly.csv'
-MONTHLY_SRC   = ETC_DIR / 'MonthlyMean_1999-9_2017-10.csv'
-MONTHLY_OUT   = ETC_DIR / 'MonthlyMean_1999-9_2026-4-30.csv'
+MONTHLY_SRC   = ETC_DIR / 'MonthlyMean_1999-9_2026-4-30.csv'
+MONTHLY_OUT   = ETC_DIR / 'MonthlyMean_1999-9_2026-5-15.csv'
 
 NOAA_URL = (
     'https://api.tidesandcurrents.noaa.gov/api/prod/datagetter'
